@@ -1,0 +1,539 @@
+{% extends 'shared/_layout.html' %}
+
+{% block content %}
+    <section id="slider"><!--slider-->
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div id="slider-carousel" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <li data-target="#slider-carousel" data-slide-to="0" class="active"></li>
+                            <li data-target="#slider-carousel" data-slide-to="1"></li>
+                        </ol>
+
+                        <div class="carousel-inner">
+
+                            <div class="item active">
+                                <div class="col-sm-6">
+                                    <h1><span>SHOP</span>CENTER</h1>
+                                    <h2>Shop Center</h2>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                                        incididunt ut labore et dolore magna aliqua. </p>
+                                    <button type="button" class="btn btn-default get">Get it now</button>
+                                </div>
+                                <div class="col-sm-6">
+                                    <img src="/static/images/home/girl2.jpg" class="girl img-responsive" alt=""/>
+                                    <img src="/static/images/home/pricing.png" class="pricing" alt=""/>
+                                </div>
+                            </div>
+
+                            <div class="item">
+                                <div class="col-sm-6">
+                                    <h1><span>SHOP</span>CENTER</h1>
+                                    <h2>Shop Center</h2>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                                        incididunt ut labore et dolore magna aliqua. </p>
+                                    <button type="button" class="btn btn-default get">Get it now</button>
+                                </div>
+                                <div class="col-sm-6">
+                                    <img src="/static/images/home/girl2.jpg" class="girl img-responsive" alt=""/>
+                                    <img src="/static/images/home/pricing.png" class="pricing" alt=""/>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
+                            <i class="fa fa-angle-left"></i>
+                        </a>
+                        <a href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next">
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section><!--/slider-->
+
+    <section>
+        <div class="container">
+            <div class="row">
+
+                <div class="col-sm-12 padding-right">
+
+
+                    <div class="category-tab"><!--category-tab-->
+                        <a href="{% url 'home_page' %}"><h2 class="title text-center">محصولات</h2></a>
+
+						<div class="col-sm-12">
+							<ul class="nav nav-tabs">
+								<li class="active"><a href="#Tab_001" data-toggle="tab">مبلمان</a></li>
+								<li><a href="#Tab_002" data-toggle="tab">اداری</a></li>
+								<li><a href="#Tab_003" data-toggle="tab">کمد ها</a></li>
+								<li><a href="#Tab_004" data-toggle="tab">میزآرایش</a></li>
+								<li><a href="#Tab_005" data-toggle="tab">دراور</a></li>
+								<li><a href="#Tab_006" data-toggle="tab">جاکفشی</a></li>
+                                <li><a href="#Tab_007" data-toggle="tab">دکور</a></li>
+                                <li><a href="#Tab_008" data-toggle="tab">میز ناهار خوری</a></li>
+                                <li><a href="#Tab_009" data-toggle="tab">کالای خواب</a></li>
+                                <li><a href="#Tab_0010" data-toggle="tab">مصنوعات فلزی</a></li>
+							</ul>
+						</div>
+						<div class="tab-content">
+							<div class="tab-pane fade active in" id="Tab_001" >
+                                {% for product in Mobleman %}
+                                <div class="col-sm-3">
+                                    <div class="product-image-wrapper">
+                                        <div class="single-products">
+                                            <div class="productinfo text-center">
+                                                {% if product.image1 %}
+                                                <img src="{{product.image1}}" alt=""/>
+                                                {% else %}
+                                                    <img src="/static/images/home/Tabs.png" alt=""/>
+                                                {% endif %}
+                                                <h2>{{product.price}} ریال</h2>
+                                                <h2>{{product.model}}</h2>
+                                                <p>{{product.color}}</p>
+                                                {% if product.details %}
+                                                <p>{{product.details}}</p>
+                                                {% endif %}
+                                                <a href="{% url 'Order_page' int=product.id%}" class="btn btn-default add-to-cart"><i
+                                                        class="fa fa-shopping-cart"></i>خریـد</a>
+                                            </div>
+                                            <div class="product-overlay">
+                                                <div class="overlay-content">
+                                                    <h2>{{product.price}} ریال</h2>
+                                                    <h2>{{product.model}}</h2>
+                                                    <p>{{product.color}}</p>
+                                                    {% if product.details %}
+                                                    <p>{{product.details}}</p>
+                                                    {% endif %}
+                                                    <a href="{% url 'Order_page' int=product.id%}" class="btn btn-default add-to-cart"><i
+                                                            class="fa fa-shopping-cart"></i>خریـد</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+							</div>
+							
+							<div class="tab-pane fade" id="Tab_002" >
+                                {% for product in Edari %}
+                                <div class="col-sm-3">
+                                    <div class="product-image-wrapper">
+                                        <div class="single-products">
+                                            <div class="productinfo text-center">
+                                                {% if product.image1 %}
+                                                <img src="{{product.image1}}" alt=""/>
+                                                {% else %}
+<img src="/static/images/home/Tabs.png" alt=""/>
+                                                {% endif %}
+                                                <h2>{{product.price}} ریال</h2>
+                                                <h2>{{product.model}}</h2>
+                                                <p>{{product.color}}</p>
+                                                {% if product.details %}
+                                                <p>{{product.details}}</p>
+                                                {% endif %}
+                                                <a href="{% url 'Order_page' int=product.id%}" class="btn btn-default add-to-cart"><i
+                                                        class="fa fa-shopping-cart"></i>خریـد</a>
+                                            </div>
+                                            <div class="product-overlay">
+                                                <div class="overlay-content">
+                                                    <h2>{{product.price}} ریال</h2>
+                                                    <h2>{{product.model}}</h2>
+                                                    <p>{{product.color}}</p>
+                                                    {% if product.details %}
+                                                    <p>{{product.details}}</p>
+                                                    {% endif %}
+                                                    <a href="{% url 'Order_page' int=product.id%}" class="btn btn-default add-to-cart"><i
+                                                            class="fa fa-shopping-cart"></i>خریـد</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+							</div>
+							
+							<div class="tab-pane fade" id="Tab_003" >
+                                {% for product in Komod %}
+                                <div class="col-sm-3">
+                                    <div class="product-image-wrapper">
+                                        <div class="single-products">
+                                            <div class="productinfo text-center">
+                                                {% if product.image1 %}
+                                                <img src="{{product.image1}}" alt=""/>
+                                                {% else %}
+<img src="/static/images/home/Tabs.png" alt=""/>
+                                                {% endif %}
+                                                <h2>{{product.price}} ریال</h2>
+                                                <h2>{{product.model}}</h2>
+                                                <p>{{product.color}}</p>
+                                                {% if product.details %}
+                                                <p>{{product.details}}</p>
+                                                {% endif %}
+                                                <a href="{% url 'Order_page' int=product.id%}" class="btn btn-default add-to-cart"><i
+                                                        class="fa fa-shopping-cart"></i>خریـد</a>
+                                            </div>
+                                            <div class="product-overlay">
+                                                <div class="overlay-content">
+                                                    <h2>{{product.price}} ریال</h2>
+                                                    <h2>{{product.model}}</h2>
+                                                    <p>{{product.color}}</p>
+                                                    {% if product.details %}
+                                                    <p>{{product.details}}</p>
+                                                    {% endif %}
+                                                    <a href="{% url 'Order_page' int=product.id%}" class="btn btn-default add-to-cart"><i
+                                                            class="fa fa-shopping-cart"></i>خریـد</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+							</div>
+							
+							<div class="tab-pane fade" id="Tab_004" >
+                                {% for product in Miz_Arayesh %}
+                                <div class="col-sm-3">
+                                    <div class="product-image-wrapper">
+                                        <div class="single-products">
+                                            <div class="productinfo text-center">
+                                                {% if product.image1 %}
+                                                <img src="{{product.image1}}" alt=""/>
+                                                {% else %}
+<img src="/static/images/home/Tabs.png" alt=""/>
+                                                {% endif %}
+                                                <h2>{{product.price}} ریال</h2>
+                                                <h2>{{product.model}}</h2>
+                                                <p>{{product.color}}</p>
+                                                {% if product.details %}
+                                                <p>{{product.details}}</p>
+                                                {% endif %}
+                                                <a href="{% url 'Order_page' int=product.id%}" class="btn btn-default add-to-cart"><i
+                                                        class="fa fa-shopping-cart"></i>خریـد</a>
+                                            </div>
+                                            <div class="product-overlay">
+                                                <div class="overlay-content">
+                                                    <h2>{{product.price}} ریال</h2>
+                                                    <h2>{{product.model}}</h2>
+                                                    <p>{{product.color}}</p>
+                                                    {% if product.details %}
+                                                    <p>{{product.details}}</p>
+                                                    {% endif %}
+                                                    <a href="{% url 'Order_page' int=product.id%}" class="btn btn-default add-to-cart"><i
+                                                            class="fa fa-shopping-cart"></i>خریـد</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+							</div>
+							
+							<div class="tab-pane fade" id="Tab_005" >
+                                {% for product in Dravel %}
+                                <div class="col-sm-3">
+                                    <div class="product-image-wrapper">
+                                        <div class="single-products">
+                                            <div class="productinfo text-center">
+                                                {% if product.image1 %}
+                                                <img src="{{product.image1}}" alt=""/>
+                                                {% else %}
+<img src="/static/images/home/Tabs.png" alt=""/>
+                                                {% endif %}
+                                                <h2>{{product.price}} ریال</h2>
+                                                <h2>{{product.model}}</h2>
+                                                <p>{{product.color}}</p>
+                                                {% if product.details %}
+                                                <p>{{product.details}}</p>
+                                                {% endif %}
+                                                <a href="{% url 'Order_page' int=product.id%}" class="btn btn-default add-to-cart"><i
+                                                        class="fa fa-shopping-cart"></i>خریـد</a>
+                                            </div>
+                                            <div class="product-overlay">
+                                                <div class="overlay-content">
+                                                    <h2>{{product.price}} ریال</h2>
+                                                    <h2>{{product.model}}</h2>
+                                                    <p>{{product.color}}</p>
+                                                    {% if product.details %}
+                                                    <p>{{product.details}}</p>
+                                                    {% endif %}
+                                                    <a href="{% url 'Order_page' int=product.id%}" class="btn btn-default add-to-cart"><i
+                                                            class="fa fa-shopping-cart"></i>خریـد</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+							</div>
+
+                            <div class="tab-pane fade" id="Tab_006" >
+                                {% for product in Jakafshi %}
+                                <div class="col-sm-3">
+                                    <div class="product-image-wrapper">
+                                        <div class="single-products">
+                                            <div class="productinfo text-center">
+                                                {% if product.image1 %}
+                                                <img src="{{product.image1}}" alt=""/>
+                                                {% else %}
+<img src="/static/images/home/Tabs.png" alt=""/>
+                                                {% endif %}
+                                                <h2>{{product.price}} ریال</h2>
+                                                <h2>{{product.model}}</h2>
+                                                <p>{{product.color}}</p>
+                                                {% if product.details %}
+                                                <p>{{product.details}}</p>
+                                                {% endif %}
+                                                <a href="{% url 'Order_page' int=product.id%}" class="btn btn-default add-to-cart"><i
+                                                        class="fa fa-shopping-cart"></i>خریـد</a>
+                                            </div>
+                                            <div class="product-overlay">
+                                                <div class="overlay-content">
+                                                    <h2>{{product.price}} ریال</h2>
+                                                    <h2>{{product.model}}</h2>
+                                                    <p>{{product.color}}</p>
+                                                    {% if product.details %}
+                                                    <p>{{product.details}}</p>
+                                                    {% endif %}
+                                                    <a href="{% url 'Order_page' int=product.id%}" class="btn btn-default add-to-cart"><i
+                                                            class="fa fa-shopping-cart"></i>خریـد</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+							</div>
+
+
+                            <div class="tab-pane fade" id="Tab_007" >
+                                {% for product in Dekor %}
+                                <div class="col-sm-3">
+                                    <div class="product-image-wrapper">
+                                        <div class="single-products">
+                                            <div class="productinfo text-center">
+                                                {% if product.image1 %}
+                                                <img src="{{product.image1}}" alt=""/>
+                                                {% else %}
+<img src="/static/images/home/Tabs.png" alt=""/>
+                                                {% endif %}
+                                                <h2>{{product.price}} ریال</h2>
+                                                <h2>{{product.model}}</h2>
+                                                <p>{{product.color}}</p>
+                                                {% if product.details %}
+                                                <p>{{product.details}}</p>
+                                                {% endif %}
+                                                <a href="{% url 'Order_page' int=product.id%}" class="btn btn-default add-to-cart"><i
+                                                        class="fa fa-shopping-cart"></i>خریـد</a>
+                                            </div>
+                                            <div class="product-overlay">
+                                                <div class="overlay-content">
+                                                    <h2>{{product.price}} ریال</h2>
+                                                    <h2>{{product.model}}</h2>
+                                                    <p>{{product.color}}</p>
+                                                    {% if product.details %}
+                                                    <p>{{product.details}}</p>
+                                                    {% endif %}
+                                                    <a href="{% url 'Order_page' int=product.id%}" class="btn btn-default add-to-cart"><i
+                                                            class="fa fa-shopping-cart"></i>خریـد</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+							</div> 
+
+                            <div class="tab-pane fade" id="Tab_008" >
+                                {% for product in Miz_Nahar_Khory %}
+                                <div class="col-sm-3">
+                                    <div class="product-image-wrapper">
+                                        <div class="single-products">
+                                            <div class="productinfo text-center">
+                                                {% if product.image1 %}
+                                                <img src="{{product.image1}}" alt=""/>
+                                                {% else %}
+<img src="/static/images/home/Tabs.png" alt=""/>
+                                                {% endif %}
+                                                <h2>{{product.price}} ریال</h2>
+                                                <h2>{{product.model}}</h2>
+                                                <p>{{product.color}}</p>
+                                                {% if product.details %}
+                                                <p>{{product.details}}</p>
+                                                {% endif %}
+                                                <a href="{% url 'Order_page' int=product.id%}" class="btn btn-default add-to-cart"><i
+                                                        class="fa fa-shopping-cart"></i>خریـد</a>
+                                            </div>
+                                            <div class="product-overlay">
+                                                <div class="overlay-content">
+                                                    <h2>{{product.price}} ریال</h2>
+                                                    <h2>{{product.model}}</h2>
+                                                    <p>{{product.color}}</p>
+                                                    {% if product.details %}
+                                                    <p>{{product.details}}</p>
+                                                    {% endif %}
+                                                    <a href="{% url 'Order_page' int=product.id%}" class="btn btn-default add-to-cart"><i
+                                                            class="fa fa-shopping-cart"></i>خریـد</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+							</div>
+
+                            <div class="tab-pane fade" id="Tab_009" >
+                                {% for product in KalayeKhab %}
+                                <div class="col-sm-3">
+                                    <div class="product-image-wrapper">
+                                        <div class="single-products">
+                                            <div class="productinfo text-center">
+                                                {% if product.image1 %}
+                                                <img src="{{product.image1}}" alt=""/>
+                                                {% else %}
+<img src="/static/images/home/Tabs.png" alt=""/>
+                                                {% endif %}
+                                                <h2>{{product.price}} ریال</h2>
+                                                <h2>{{product.model}}</h2>
+                                                <p>{{product.color}}</p>
+                                                {% if product.details %}
+                                                <p>{{product.details}}</p>
+                                                {% endif %}
+                                                <a href="{% url 'Order_page' int=product.id%}" class="btn btn-default add-to-cart"><i
+                                                        class="fa fa-shopping-cart"></i>خریـد</a>
+                                            </div>
+                                            <div class="product-overlay">
+                                                <div class="overlay-content">
+                                                    <h2>{{product.price}} ریال</h2>
+                                                    <h2>{{product.model}}</h2>
+                                                    <p>{{product.color}}</p>
+                                                    {% if product.details %}
+                                                    <p>{{product.details}}</p>
+                                                    {% endif %}
+                                                    <a href="{% url 'Order_page' int=product.id%}" class="btn btn-default add-to-cart"><i
+                                                            class="fa fa-shopping-cart"></i>خریـد</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+							</div>
+
+                            <div class="tab-pane fade" id="Tab_0010" >
+                                {% for product in MasnoateFelezi %}
+                                <div class="col-sm-3">
+                                    <div class="product-image-wrapper">
+                                        <div class="single-products">
+                                            <div class="productinfo text-center">
+                                                {% if product.image1 %}
+                                                <img src="{{product.image1}}" alt=""/>
+                                                {% else %}
+<img src="/static/images/home/Tabs.png" alt=""/>
+                                                {% endif %}
+                                                <h2>{{product.price}} ریال</h2>
+                                                <h2>{{product.model}}</h2>
+                                                <p>{{product.color}}</p>
+                                                {% if product.details %}
+                                                <p>{{product.details}}</p>
+                                                {% endif %}
+                                                <a href="{% url 'Order_page' int=product.id%}" class="btn btn-default add-to-cart"><i
+                                                        class="fa fa-shopping-cart"></i>خریـد</a>
+                                            </div>
+                                            <div class="product-overlay">
+                                                <div class="overlay-content">
+                                                    <h2>{{product.price}} ریال</h2>
+                                                    <h2>{{product.model}}</h2>
+                                                    <p>{{product.color}}</p>
+                                                    {% if product.details %}
+                                                    <p>{{product.details}}</p>
+                                                    {% endif %}
+                                                    <a href="{% url 'Order_page' int=product.id%}" class="btn btn-default add-to-cart"><i
+                                                            class="fa fa-shopping-cart"></i>خریـد</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+							</div>
+						</div>
+					</div><!--/category-tab-->
+
+                    <!-- <div class="features_items">WholeSale_items-->
+                        <!-- <a href="{% url 'home_page' %}"><h2 class="title text-center">تمام محصولات</h2></a> -->
+                        <!-- <div id="major-item-carousel" class="carousel slide" data-ride="carousel"> -->
+                            <!-- <div class="carousel-inner"> -->
+                                <!-- <div class="item active">
+                                    {% for products in products %}
+                                    <div class="col-sm-3">
+                                        <div class="product-image-wrapper">
+                                            <div class="single-products">
+                                                <div class="productinfo text-center">
+                                                    {% if product.image1 %}
+                                                    <img src="{{product.image1}}" alt=""/>
+                                                    {% else %}
+<img src="/static/images/home/Tabs.png" alt=""/>
+                                                    {% endif %}
+                                                    <h2>{{products.price}} ریال</h2>
+                                                    <h2>{{products.model}}</h2>
+                                                    {% if products.details %}
+                                                    <p>{{products.details}}</p>
+                                                    {% endif %}
+                                                    <a href="#" class="btn btn-default add-to-cart"><i
+                                                            class="fa fa-shopping-cart"></i>خریـد</a>
+                                                </div>
+                                                <div class="product-overlay">
+                                                    <div class="overlay-content">
+                                                        <h2>{{products.price}} ریال</h2>
+                                                        <h2>{{products.model}}</h2>
+                                                        {% if products.details %}
+                                                        <p>{{products.details}}</p>
+                                                        {% endif %}
+                                                        <a href="#" class="btn btn-default add-to-cart"><i
+                                                                class="fa fa-shopping-cart"></i>خریـد</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div> -->
+                                <!-- <div class="item"> -->
+                                    <!-- {% for products in product %}
+                                    <div class="col-sm-3">
+                                        <div class="product-image-wrapper">
+                                            <div class="single-products">
+                                                <div class="productinfo text-center">
+                                                    <img src="/static/images/home/product.jpg" alt=""/>
+                                                    <h2>{{products.price}} R</h2>
+                                                    <h2>{{products.model}}</h2>
+                                                    <p>{{products.details}}</p>
+                                                    <a href="#" class="btn btn-default add-to-cart"><i
+                                                            class="fa fa-shopping-cart"></i>خریـد</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %} -->
+                                <!-- </div> -->
+                            <!-- </div> -->
+                            <!-- <a class="left recommended-item-control" href="#major-item-carousel" data-slide="prev">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a class="right recommended-item-control" href="#major-item-carousel" data-slide="next">
+                                <i class="fa fa-angle-right"></i> -->
+                            <!-- </a> -->
+                        <!-- </div> -->
+                    <!-- </div>WholeSale_items -->
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+{% endblock %}

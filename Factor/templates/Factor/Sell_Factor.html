@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="fa-IR">
+<head>
+    <meta charset="UTF-8">
+    <title>فاکتور فروش</title>
+</head>
+<body style="direction: rtl;">
+
+<div class="col-md-2" style="text-align: center;">
+    <h2>تلفن ها :</h2>
+    <!-- 0913-353-9963 -->
+    <h4>آقای زارع : 9963 353 0913 </h4>
+    <h4>03538223560</h4>
+</div>
+
+<div class="col-md-2 center form-group" style="text-align: center;">
+    <h1>مبلمان و صنایع چوب سروان</h1>
+</div>
+
+
+
+<h3 style="display: flex; align-items: center; justify-content: center;">خریدار : {{ buyer }}</h3>
+
+<div style="display: flex; align-items: center; justify-content: center;">
+<table style="border: 1rem; width: 47%;">
+    <colgroup>
+      <col style="background-color: greenyellow" span="5" />
+    </colgroup>
+
+    <tr>
+        <th>محصول</th>
+        <th>رنگ</th>
+        <th>قیمت</th>
+        <th>تعداد</th>
+    </tr>
+	{% for product in product_data %}
+     <tr>
+        <td>{{ product.model }}</td>
+        <td>{{ product.color }}</td>
+        <td>{{ product.price }}</td>
+        <td>{{ product.number }}</td>
+     </tr>
+    {% endfor %}
+</table>
+</div>
+
+<div style="display: flex; align-items: center; justify-content: center;">
+    <table style="border: 1rem; width: 47%;">
+        <colgroup>
+            <col style="background-color: greenyellow" span="5" />
+        </colgroup>
+        <tr>
+            <td>مجموع : {{sum}}</td>
+        </tr>
+    </table>
+</div>
+
+
+<h3 style="text-align: center;">مانده حساب : {{ debt }} ریال</h3>
+<h3 style="text-align: center;">اجناس فوق صحیح و سالم تحویل گردید.</h3>
+<h3 style="text-align: center;">اقلام فوق تا پایان تسویه حساب به صورت امانت نزد نامرده می شود و اینجانب تعهد می نمایم که کل مبلغ را عندالمطالبه بپردازم.</h3>
+<h3 style="text-align: center;">تعویض و مرجوعی پذیرفته نمی شود لطفا در انتخاب خود دقت فرمایید</h3>
+
+<h3 style="text-align: center;">امضای فروشنده:...................امضای تحویل گیرنده:...................امضای خریدار:...................</h3>
+
+<table>
+    <tr><th>.</th></tr>
+    <tr><td>.</td></tr>
+    <tr><td>.</td></tr>
+    <tr><td>.</td></tr>
+    <tr><td>.</td></tr>
+    <tr><td>.</td></tr>
+</table>
+
+
+
+<button type="button" class="btn btn-primary pull-right"><a href="{% url 'EmptySellModel' %}">تخلیه کردن</a></button>
+
+</body>
+</html>
