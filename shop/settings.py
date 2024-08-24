@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'products',
     'contact_module',
     'Factor',
-    'login_signin',
     'django_render_partial',
 ]
 

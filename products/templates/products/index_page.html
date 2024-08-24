@@ -1,4 +1,5 @@
 {% extends 'shared/_layout.html' %}
+{% load render_partial %}
 
 {% block content %}
     <section id="slider"><!--slider-->
@@ -64,7 +65,7 @@
 
 
                     <div class="category-tab"><!--category-tab-->
-                        <a href="{% url 'home_page' %}"><h2 class="title text-center">محصولات</h2></a>
+                        <a href="{% render_partial 'products.views.home' username=username password=password %}"><h2 class="title text-center">محصولات</h2></a>
 
 						<div class="col-sm-12">
 							<ul class="nav nav-tabs">
@@ -463,74 +464,6 @@
 							</div>
 						</div>
 					</div><!--/category-tab-->
-
-                    <!-- <div class="features_items">WholeSale_items-->
-                        <!-- <a href="{% url 'home_page' %}"><h2 class="title text-center">تمام محصولات</h2></a> -->
-                        <!-- <div id="major-item-carousel" class="carousel slide" data-ride="carousel"> -->
-                            <!-- <div class="carousel-inner"> -->
-                                <!-- <div class="item active">
-                                    {% for products in products %}
-                                    <div class="col-sm-3">
-                                        <div class="product-image-wrapper">
-                                            <div class="single-products">
-                                                <div class="productinfo text-center">
-                                                    {% if product.image1 %}
-                                                    <img src="{{product.image1}}" alt=""/>
-                                                    {% else %}
-<img src="/static/images/home/Tabs.png" alt=""/>
-                                                    {% endif %}
-                                                    <h2>{{products.price}} ریال</h2>
-                                                    <h2>{{products.model}}</h2>
-                                                    {% if products.details %}
-                                                    <p>{{products.details}}</p>
-                                                    {% endif %}
-                                                    <a href="#" class="btn btn-default add-to-cart"><i
-                                                            class="fa fa-shopping-cart"></i>خریـد</a>
-                                                </div>
-                                                <div class="product-overlay">
-                                                    <div class="overlay-content">
-                                                        <h2>{{products.price}} ریال</h2>
-                                                        <h2>{{products.model}}</h2>
-                                                        {% if products.details %}
-                                                        <p>{{products.details}}</p>
-                                                        {% endif %}
-                                                        <a href="#" class="btn btn-default add-to-cart"><i
-                                                                class="fa fa-shopping-cart"></i>خریـد</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    {% endfor %}
-                                </div> -->
-                                <!-- <div class="item"> -->
-                                    <!-- {% for products in product %}
-                                    <div class="col-sm-3">
-                                        <div class="product-image-wrapper">
-                                            <div class="single-products">
-                                                <div class="productinfo text-center">
-                                                    <img src="/static/images/home/product.jpg" alt=""/>
-                                                    <h2>{{products.price}} R</h2>
-                                                    <h2>{{products.model}}</h2>
-                                                    <p>{{products.details}}</p>
-                                                    <a href="#" class="btn btn-default add-to-cart"><i
-                                                            class="fa fa-shopping-cart"></i>خریـد</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    {% endfor %} -->
-                                <!-- </div> -->
-                            <!-- </div> -->
-                            <!-- <a class="left recommended-item-control" href="#major-item-carousel" data-slide="prev">
-                                <i class="fa fa-angle-left"></i>
-                            </a>
-                            <a class="right recommended-item-control" href="#major-item-carousel" data-slide="next">
-                                <i class="fa fa-angle-right"></i> -->
-                            <!-- </a> -->
-                        <!-- </div> -->
-                    <!-- </div>WholeSale_items -->
-
                 </div>
 
             </div>

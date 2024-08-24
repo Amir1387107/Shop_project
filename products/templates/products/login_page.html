@@ -1,19 +1,38 @@
-{% extends 'shared/_layout.html' %}
-
-{% block title %}
-
-{% endblock %}
-
-{% block content %}
-	<div class="container">
+{% load render_partial %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>login_signin</title>
+    {% include 'shared/header_references.html' %}
+</head>
+<body>
+{#{% render_partial 'products.views.site_header_component' %}#}
+<div class="container">
 		<section id="form"><!--form-->
 			<div class="row">
 				<div class="col-sm-4 col-sm-offset-1">
 					<div class="login-form"><!--login form-->
 						<h2>ورود به حساب کاربـری :</h2>
-						<form action="#">
-							<input type="text" placeholder="نام کاربری">
-							<input type="email" placeholder="آدرس ایمیـل">
+						<form method="post" action="{% url 'login' %}">
+                            {% csrf_token %}
+
+                            {% if error_log %}
+                            	<div class="col-md-6 pull-right alert-warning alert-danger" style="color: red">
+                                    {{ error_log }}
+                                </div>
+                            {% endif %}
+
+                            <div class="form-group col-md-12">
+                                {{ loginForm.username }}
+                            </div>
+                            <div class="form-group col-md-12">
+                                {{ loginForm.password }}
+                            </div>
+
 							<span>
 								<input type="checkbox" class="checkbox">
 								مرا بخاطـر بسپـار
@@ -65,4 +84,7 @@
 			</div>
 		</section>
 	</div>
-{% endblock %}
+{% render_partial 'products.views.site_footer_component' %}
+{% include 'shared/footer_references.html' %}
+</body>
+</html>

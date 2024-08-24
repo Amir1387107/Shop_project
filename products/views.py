@@ -1,27 +1,111 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
-from .models import Products
+from django.urls import reverse
+from .models import Products, UserOfSite
 from .models import Kind, Orders
-from .forms import OrdersModelForm
+from .forms import OrdersModelForm, SigninForm, LoginForm
 
 Product=Products
 
 
-def HomePageView(request):
-    Products=Product.objects.all().order_by('-price')
+class loginView(View):
+    def get(self, request):
+        context = {'SigninForm': SigninForm, 'loginForm': LoginForm}
+        return render(request, 'products/login_page.html', context)
+
+    def post(self, request):
+        Post=request.POST
+        Form = SigninForm(Post)
+        if Form.is_valid():
+            error = None
+            if UserOfSite.objects.filter(username=Form.cleaned_data['username']).exists():
+                error = 'نام کاربری در سایت موجود می باشد'
+            elif UserOfSite.objects.filter(email=Form.cleaned_data['email']).exists():
+                error = 'ایمیل مورد نظر در سایت ثبت نام کرده است'
+            elif UserOfSite.objects.filter(phone_number=Form.cleaned_data['phone_number']).exists():
+                error = 'شماره تلفن مورد نظر در سایت ثبت شده است'
+            if error is not None:
+                context = {'SigninForm': SigninForm, 'loginForm': LoginForm, 'error': error}
+                return render(request, 'products/login_page.html', context)
+            if Form.is_valid():
+                user = UserOfSite(username=Form.cleaned_data['username'], email=Form.cleaned_data['email']
+                ,password=Form.cleaned_data['password'], phone_number=Form.cleaned_data['phone_number'])
+                user.save()
+                User = UserOfSite.objects.get(username=Form.cleaned_data['username'], password=Form.cleaned_data['password'])
+                Products = Product.objects.all().order_by('-price')
+                return render(request, 'products/index_page.html', context={
+                    'U': User.username,
+                    'P': User.password,
+                    'products': Products,
+                    'Mobleman': Product.objects.filter(kind=1).values(),
+                    'Komod': Product.objects.filter(kind=4).values(),
+                    'Edari': Product.objects.filter(kind=3).values(),
+                    'Miz_Arayesh': Product.objects.filter(kind=6).values(),
+                    'Dravel': Product.objects.filter(kind=8).values(),
+                    'Jakafshi': Product.objects.filter(kind=9).values(),
+                    'Dekor': Product.objects.filter(kind=10).values(),
+                    'Miz_Nahar_Khory': Product.objects.filter(kind=11).values(),
+                    'KalayeKhab': Product.objects.filter(kind=12).values(),
+                    'MasnoateFelezi': Product.objects.filter(kind=13).values(),
+                })
+
+        Form_sing = LoginForm(Post)
+        print(Form_sing.is_valid())
+        if Form_sing.is_valid():
+            if UserOfSite.objects.filter(username=Form_sing.cleaned_data['username'], password=Form_sing.cleaned_data['password']).exists():
+                User = UserOfSite.objects.get(username=Form_sing.cleaned_data['username'], password=Form_sing.cleaned_data['password'])
+                Products = Product.objects.all().order_by('-price')
+                U = User.username
+                P = User.password
+                return render(request, 'products/index_page.html', context={
+                    'U': U,
+                    'P': P,
+                    'products': Products,
+                    'Mobleman': Product.objects.filter(kind=1).values(),
+                    'Komod': Product.objects.filter(kind=4).values(),
+                    'Edari': Product.objects.filter(kind=3).values(),
+                    'Miz_Arayesh': Product.objects.filter(kind=6).values(),
+                    'Dravel': Product.objects.filter(kind=8).values(),
+                    'Jakafshi': Product.objects.filter(kind=9).values(),
+                    'Dekor': Product.objects.filter(kind=10).values(),
+                    'Miz_Nahar_Khory': Product.objects.filter(kind=11).values(),
+                    'KalayeKhab': Product.objects.filter(kind=12).values(),
+                    'MasnoateFelezi': Product.objects.filter(kind=13).values(),
+                })
+
+        error = None
+        if UserOfSite.objects.filter(username=Form_sing.cleaned_data['username']).exists():
+            error = 'رمز عبور صحیح نمی باشد'
+        elif UserOfSite.objects.filter(phone_number=Form_sing.cleaned_data['password']).exists():
+            error = 'نام کاربری صحیح نمی باشد'
+        if error is not None:
+            context = {'SigninForm': SigninForm, 'loginForm': LoginForm, 'error_log': error}
+            return render(request, 'products/login_page.html', context)
+
+
+def home(request, Username, Password):
+    User = UserOfSite.objects.get(username=Username,
+                                  password=Password)
+    Products = Product.objects.all().order_by('-price')
     return render(request, 'products/index_page.html', context={
-        'products':Products,
-        'Mobleman':Product.objects.filter(kind=1).values(),
-        'Komod':Product.objects.filter(kind=4).values(),
-        'Edari':Product.objects.filter(kind=3).values(),
-        'Miz_Arayesh':Product.objects.filter(kind=6).values(),
-        'Dravel':Product.objects.filter(kind=8).values(),
-        'Jakafshi':Product.objects.filter(kind=9).values(),
-        'Dekor':Product.objects.filter(kind=10).values(),
-        'Miz_Nahar_Khory':Product.objects.filter(kind=11).values(),
-        'KalayeKhab':Product.objects.filter(kind=12).values(),
-        'MasnoateFelezi':Product.objects.filter(kind=13).values(),
+        'U': User.username,
+        'P': User.password,
+        'products': Products,
+        'Mobleman': Product.objects.filter(kind=1).values(),
+        'Komod': Product.objects.filter(kind=4).values(),
+        'Edari': Product.objects.filter(kind=3).values(),
+        'Miz_Arayesh': Product.objects.filter(kind=6).values(),
+        'Dravel': Product.objects.filter(kind=8).values(),
+        'Jakafshi': Product.objects.filter(kind=9).values(),
+        'Dekor': Product.objects.filter(kind=10).values(),
+        'Miz_Nahar_Khory': Product.objects.filter(kind=11).values(),
+        'KalayeKhab': Product.objects.filter(kind=12).values(),
+        'MasnoateFelezi': Product.objects.filter(kind=13).values(),
     })
+
+
+
+
 
 
 class OrdersView(View):
