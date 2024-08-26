@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from django.urls import reverse
 from .models import Products, UserOfSite
-from .models import Kind, Orders
-from .forms import OrdersModelForm, SigninForm, LoginForm
+from .models import Kind, Orders, reviews
+from .forms import OrdersModelForm, SigninForm, LoginForm, reviewForm
 
 Product=Products
 
@@ -72,6 +72,24 @@ class loginView(View):
         if error is not None:
             context = {'SigninForm': SigninForm, 'loginForm': LoginForm, 'error_log': error}
             return render(request, 'products/login_page.html', context)
+
+
+class product_details(View):
+    def get(self, request, pk, Username, password):
+        context = {'product': Product.objects.all().filter(id=pk), 'Form': reviewForm,
+                   'User': UserOfSite.objects.get(username=Username, password=password), 'reviews': reviews.objects.all().filter(product_id=pk)}
+        return render(request, 'products/product_detail.html', context)
+
+    def post(self, request, pk, Username, password):
+        form = reviewForm(request.POST)
+        if form.is_valid():
+            review = reviews(username=Username, product_id=pk, review=form.cleaned_data['review'])
+            review.save()
+
+        context = {'product': Product.objects.all().filter(id=pk), 'Form': reviewForm,
+                   'User': UserOfSite.objects.get(username=Username, password=password), 'reviews': reviews.objects.all().filter(product_id=pk)}
+        return render(request, 'products/product_detail.html', context)
+
 
 
 class OrdersView(View):

@@ -12,12 +12,11 @@ class SellModel(models.Model):
     color = models.CharField(max_length=1000, verbose_name='رنگ محصول', blank=True, null=True)
     price = models.IntegerField(verbose_name='قیمت محصول', blank=True, null=True)
 
-
-
-
     class Meta:
         verbose_name = 'فروش'
         verbose_name_plural = 'فروش ها'
 
 
-
+class More(models.Model):
+    details = models.TextField(verbose_name='توضیحات', blank=True, null=True)
+    off = models.IntegerField(verbose_name='تخفیف (ریال)', blank=True, null=True)

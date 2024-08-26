@@ -33,3 +33,14 @@ class SellForm(forms.ModelForm):
 
         fields = ['buyer', 'number', 'model', 'color', 'price']
 
+
+class MoreForm(forms.ModelForm):
+    class Meta:
+        model = More
+
+        fields = '__all__'
+
+        widgets = {
+            'details':forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'توضیحات'}),
+            'off':forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'تخفیف به ریال'})
+        }

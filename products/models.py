@@ -58,11 +58,25 @@ class Kind(models.Model):
         verbose_name_plural = 'دسته بندی'
 
 
+class reviews(models.Model):
+    username = models.CharField(max_length=1000, verbose_name='نام کاربری')
+    product_id = models.IntegerField(verbose_name='id محصول')
+    review = models.TextField(verbose_name='نظر')
+
+    def __str__(self):
+        return self.username
+
+    class Meta:
+        verbose_name = 'نظر'
+        verbose_name_plural = 'نظرات'
+
+
 class Products(models.Model):
     price = models.CharField(max_length=300, verbose_name='قیمت')
     model = models.CharField(max_length=300, verbose_name='مدل')
     color = models.CharField(max_length=300, verbose_name='رنگ')
     kind = models.ManyToManyField(Kind, related_name='Kind', verbose_name='دسته')
+    reviews = models.ManyToManyField(reviews, related_name='reviews', verbose_name='نظرات', blank=True, null=True)
     details = models.TextField(verbose_name='توضیحات', blank=True, null=True)
 
     image1 = models.ImageField(upload_to='Images/', verbose_name='عکس1', blank=True)
@@ -70,21 +84,9 @@ class Products(models.Model):
     image3 = models.ImageField(upload_to='Images/', verbose_name='عکس3', blank=True)
     image4 = models.ImageField(upload_to='Images/', verbose_name='عکس4', blank=True)
 
-
-
     def save(self, *args, **kwargs):
         self.slug = slugify((self.id))
         super().save(*args, **kwargs)
-
-        # if not commit: 
-        #     raise NotImplementedError("Can't create User and Userextended without database save") 
-        # user = super().save(*args, **kwargs)
-        # user_profile = Userextended(user=user, cristin=self.cleaned_data['cristin']) 
-        # user_profile.save() 
-        # user_profile.rolle.add(self.cleaned_data['rolle'])
-        # user_profile.save()
-        # return user
-    
 
     def __str__(self):
         return self.model

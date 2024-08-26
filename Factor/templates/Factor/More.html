@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>ثبت تخفیف و توضیحات</title>
+    {% include 'shared/header_references.html' %}
+</head>
+<body>
+<form id="main-contact-form" class="contact-form row" action="" method="post">
+				            {% csrf_token %}
+
+                            <div class="col-md-6 form-group ">
+                                {{ More.details }}
+                            </div>
+
+                            <div class="col-md-1 form-group ">
+                                {{ More.off }}
+                            </div>
+                            <div class="col-md-1 form-group">
+                               div
+                            </div>
+
+
+				            <div class="form-group col-md-12">
+                                <button type="submit" class="btn btn-primary pull-right">ثبت</button>
+				            </div>
+				        </form>
+
+{% include 'shared/footer_references.html' %}
+
+</body>
+</html>

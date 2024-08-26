@@ -8,6 +8,9 @@
     <meta name="author" content="">
     <title>{% block title %}{% endblock %}</title>
     {% include 'shared/header_references.html' %}
+    {% block style %}
+    	
+    {% endblock %}
 </head>
 <body>
 {% render_partial 'products.views.site_header_component'  %}
