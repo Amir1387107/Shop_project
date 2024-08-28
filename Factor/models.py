@@ -6,7 +6,6 @@ from django.db import models
 
 
 class SellModel(models.Model):
-    buyer = models.CharField(max_length=1000, verbose_name='خریدار', blank=True, null=True)
     number = models.IntegerField(verbose_name='تعداد', blank=True, null=True)
     model = models.CharField(max_length=1000, verbose_name='مدل محصول', blank=True, null=True)
     color = models.CharField(max_length=1000, verbose_name='رنگ محصول', blank=True, null=True)
@@ -18,5 +17,6 @@ class SellModel(models.Model):
 
 
 class More(models.Model):
+    buyer = models.CharField(max_length=1000, verbose_name='خریدار', blank=True, null=True)
     details = models.TextField(verbose_name='توضیحات', blank=True, null=True)
     off = models.IntegerField(verbose_name='تخفیف (ریال)', blank=True, null=True)

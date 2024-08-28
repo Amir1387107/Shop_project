@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html dir="rtl" lang="fa-IR">
 <head>
@@ -9,12 +10,30 @@
 </head>
 <body style="direction: rtl;">
 
-    <div class="col-md-2" style="text-align: center;">
-        <h2>تلفن ها :</h2>
-        <!-- 0913-353-9963 -->
-        <h4>آقای زارع : 9963 353 0913 </h4>
-        <h4>03538223560</h4>
-    </div>
+<div style="display: flex; align-items: center; justify-content: center;">
+<table style="border: 1rem; width: 47%;">
+    <tr>
+        <th>
+            <pre></pre>
+            <pre></pre>
+        </th>
+        <th>
+            <div class="col-md-2" style="text-align: center;">
+                <h2>تلفن ها :</h2>
+                <h4>آقای زارع : 9963 353 0913 </h4>
+                <h4>03538223560</h4>
+            </div>
+        </th>
+        <th>
+            <pre></pre>
+            <pre></pre>
+        </th>
+        <th>
+            <img src="{% static 'Logo.jpg' %}" style="left: 40px; width: 110px; height: 110px">
+        </th>
+    </tr>
+</table>
+</div>
 
     <div class="col-md-2 center form-group" style="text-align: center;">
         <h1>مبلمان و صنایع چوب سروان</h1>
@@ -23,6 +42,8 @@
 
 
     <h3 style="display: flex; align-items: center; justify-content: center;">خریدار : {{ buyer }}</h3>
+
+    <br>
 
     <div style="display: flex; align-items: center; justify-content: center;">
     <table style="border: 1rem; width: 47%;">
@@ -47,16 +68,16 @@
 
     </table>
     </div>
-
+    <pre></pre>
     <div style="display: flex; align-items: center; justify-content: center;">
         <table style="border: 1rem; width: 47%;">
             <colgroup>
                 <col style="background-color: greenyellow" span="5" />
             </colgroup>
             <tr>
-                <td>مجموع : {{sum}}</td>
-                <td>تخفیف : {{ off }}</td>
-                <td>مجموع کل : {{ sum_all }}</td>
+                <th>مجموع : {{sum}}</th>
+                <th>تخفیف : {{ off }}</th>
+                <th>مجموع کل : {{ sum_all }}</th>
             </tr>
         </table>
 
@@ -67,12 +88,14 @@
 
     {% if details %}
         <h3 style="text-align: center;">
-        توضوحات : {{ details }}
+        توضیحات : {{ details }}
         </h3>
     {% endif %}
-    <h3 style="text-align: center;">اجناس فوق صحیح و سالم تحویل گردید.</h3>
-    <h3 style="text-align: center;">اقلام فوق تا پایان تسویه حساب به صورت امانت نزد نامرده می شود و اینجانب تعهد می نمایم که کل مبلغ را عندالمطالبه بپردازم.</h3>
-    <h3 style="text-align: center;">تعویض و مرجوعی پذیرفته نمی شود لطفا در انتخاب خود دقت فرمایید</h3>
+    <h5 style="text-align: center;">اجناس فوق صحیح و سالم تحویل گردید.</h5>
+    <h5 style="text-align: center;">اقلام فوق تا پایان تسویه حساب به صورت امانت نزد نامرده می شود و اینجانب تعهد می نمایم که کل مبلغ را عندالمطالبه بپردازم.</h5>
+    <h5 style="text-align: center;">تعویض و مرجوعی پذیرفته نمی شود لطفا در انتخاب خود دقت فرمایید</h5>
+
+<br>
 
     <h3 style="text-align: center;">امضای فروشنده:...................امضای تحویل گیرنده:...................امضای خریدار:...................</h3>
 

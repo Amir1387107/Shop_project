@@ -23,7 +23,6 @@ class BuyForm(forms.ModelForm):
 
 
 class SellForm(forms.ModelForm):
-    buyer = forms.CharField(max_length=1000, widget=forms.TextInput(), label='خریدار')
     model = forms.CharField(widget=forms.TextInput(), label='مدل محصول')
     color = forms.CharField(widget=forms.TextInput(), label='رنگ')
     number = forms.IntegerField(widget=forms.NumberInput(), label='تعداد')
@@ -31,7 +30,7 @@ class SellForm(forms.ModelForm):
     class Meta:
         model = SellModel
 
-        fields = ['buyer', 'number', 'model', 'color', 'price']
+        fields = ['number', 'model', 'color', 'price']
 
 
 class MoreForm(forms.ModelForm):
@@ -41,6 +40,7 @@ class MoreForm(forms.ModelForm):
         fields = '__all__'
 
         widgets = {
+            'buyer':forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'خریدار'}),
             'details':forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'توضیحات'}),
             'off':forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'تخفیف به ریال'})
         }

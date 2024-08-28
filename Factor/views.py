@@ -21,14 +21,13 @@ class SellView(View):
             model = buying.cleaned_data['model']
             color = buying.cleaned_data['color']
             price = buying.cleaned_data['price']
-            buyer = buying.cleaned_data['buyer']
             number = buying.cleaned_data['number']
             if Prod.objects.all().filter(model=model, color=color).exists():
                 pass
             else:
                 return HttpResponse('محصول موجود نمی باشد')
 
-            Model = SellModel(model=model, color=color, buyer=buyer, price=price, number=number)
+            Model = SellModel(model=model, color=color, price=price, number=number)
             Model.save()
 
             return render(request, 'Factor/accepted_sell.html')
@@ -85,18 +84,13 @@ def SellFactor(request):
     amount_debt = 0
     detail = None
     off = 0
-    for product in products:
-        buyer = product.buyer
-        try:
-            for i in range(product['number']):
-                sum += int(product.price)
-        except:
-            for i in range(product.number):
-                sum += int(product.price)
     if More.objects.all():
         detail = More.objects.all()[0].details
         off = More.objects.all()[0].off
+        buyer = More.objects.all()[0].buyer
 
+    for product in products:
+        sum += product.price * product.number
     try:
         amount_debt = Requests.objects.all().get(debtor=buyer).amount_of_debt
     except:

@@ -23,31 +23,20 @@
 				    	<form id="main-contact-form" class="contact-form row" action="" method="post">
 				            {% csrf_token %}
 
-                            <div class="col-md-6 form-group ">
-                                {{ SellForm.buyer.label }}
-                                {{ SellForm.buyer }}
-                                {{ SellForm.buyer.errors }}
-                            </div>
-
-                            <div class="col-md-1 form-group ">
+                            <div class="col-md-4 form-group ">
                                 {{ SellForm.number.label }}
                                 {{ SellForm.number }}
                             </div>
 
-                            <div class="col-md-2 form-group ">
+                            <div class="col-md-4 form-group ">
                                 {{ SellForm.model.label }}
                                 {{ SellForm.model }}
                             </div>
 
-                            <div class="col-md-2 form-group ">
+                            <div class="col-md-4 form-group ">
                                 {{ SellForm.color.label }}
                                 {{ SellForm.color }}
                             </div>
-
-                            <div class="col-md-1 form-group">
-                               div
-                            </div>
-
 
 				            <div class="form-group col-md-12">
                                 <button type="submit" class="btn btn-primary pull-right">ثبت</button>
