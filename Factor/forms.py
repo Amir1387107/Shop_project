@@ -40,6 +40,7 @@ class MoreForm(forms.ModelForm):
         fields = '__all__'
 
         widgets = {
+            'date':forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'تاریخ'}) ,
             'buyer':forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'خریدار'}),
             'details':forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'توضیحات'}),
             'off':forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'تخفیف به ریال'})
