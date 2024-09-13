@@ -1,5 +1,5 @@
 {% extends 'shared/_layout.html' %}
-
+{% load render_partial %}
 {% block title %}
     {{ product.title }}
 {% endblock %}
@@ -60,11 +60,11 @@
 										<span>قیمت : {{ product.price }} ريال</span>
 									</span>
                                     <span>
-										<label>تعداد :</label>
-										<input type="text" value="3" class="search_box">
+										{% comment %}<label>تعداد :</label>{% endcomment %}
+{#										<input type="text" value="3" class="search_box">#}
 										<button type="button" class="btn btn-fefault cart">
 											<i class="fa fa-shopping-cart"></i>
-											افـزودن به سبـد خریـد
+											<a href="{% url 'buy' pk=product.id Username=User.username password=User.password%}">افـزودن به سبـد خریـد</a>
 										</button>
 									</span>
                                 </div>
@@ -99,32 +99,33 @@
                     <div class="category-tab shop-details-tab"><!--category-tab-->
                         <div class="col-sm-12">
                             <ul class="nav nav-tabs">
-                                <li class="active"><a href="#reviews" data-toggle="tab">نظرات (5)</a></li>
+                                <li class="active"><a href="#reviews" data-toggle="tab">نظرات {{ sum }}</a></li>
                             </ul>
                         </div>
                         <div class="tab-content">
                             <div class="tab-pane fade active in" id="reviews">
                                 <div class="col-sm-12">
+                                    {% for answer in reveiwanswer %}
+
                                     <ul>
-                                        <li><a href=""><i class="fa fa-user"></i>مشتـری 1</a></li>
+                                        <li><a href=""><i class="fa fa-user"></i>مشتـری: {{ answer.username }}</a></li>
                                         <li><a href=""><i class="fa fa-clock-o"></i>12:41 ب . ظ</a></li>
                                         <li><a href=""><i class="fa fa-calendar-o"></i>29 تیـر 1397</a></li>
                                     </ul>
-                                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده ازلورملورم
-                                        ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان
-                                        گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و
-                                        برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای
-                                        کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان
-                                        جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه
-                                        ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد.</p>
+                                    <p>{{ answer.review }}</p>
+                                    {% endfor %}
+
                                     <p><b>نظـر خود را بنویسیـد</b></p>
 
-                                    <form method="post" action="{% url 'details' pk=product.id Username=User.username password=User.password %}">
-										<span>
-											{% csrf_token %}
+
+                                    <form method="post" action="{% url 'details' pk=ppk Username=User.username password=User.password %}">
+{#										<span>#}
+                                        <div class="col-md-12 form-group">
+                                            {% csrf_token %}
                                             {{ Form.review }}
-										</span>
-                                        <textarea name=""></textarea>
+                                        </div>
+{#										</span>#}
+                                        {% comment %}<textarea name=""></textarea>{% endcomment %}
                                         <button type="submit" class="btn btn-default pull-left">
                                             ارسـال
                                         </button>

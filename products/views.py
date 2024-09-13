@@ -1,10 +1,10 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
 from django.views import View
 from django.urls import reverse
 from .models import Products, UserOfSite
 from .models import Kind, Orders, reviews
 from .forms import OrdersModelForm, SigninForm, LoginForm, reviewForm
-
+from cart.models import Product as ProductsModel
 Product=Products
 
 
@@ -74,22 +74,37 @@ class loginView(View):
             return render(request, 'products/login_page.html', context)
 
 
+def buy(request, pk, Username, password):
+    if UserOfSite.objects.filter(username=Username, password=password).exists():
+        product = Product.objects.get(id=pk)
+        prod = ProductsModel(user=Username, model=product.model, kind=str(product.kind) ,color=product.color, price=product.price, details=product.details)
+        prod.save()
+
+    else:
+        return HttpResponse(status=404)
+
+
 class product_details(View):
     def get(self, request, pk, Username, password):
-        context = {'product': Product.objects.all().filter(id=pk), 'Form': reviewForm,
+        sum = 0
+        for i in reviews.objects.all().filter(product_id=pk):
+            sum += 1
+        context = {'reveiwanswer':reviews.objects.all().filter(product_id=pk), 'sum':sum, 'product': Product.objects.all().get(id=pk), 'ppk':pk, 'Form': reviewForm,
                    'User': UserOfSite.objects.get(username=Username, password=password), 'reviews': reviews.objects.all().filter(product_id=pk)}
         return render(request, 'products/product_detail.html', context)
 
     def post(self, request, pk, Username, password):
         form = reviewForm(request.POST)
+        print(reviews.objects.all().filter(product_id=pk))
         if form.is_valid():
             review = reviews(username=Username, product_id=pk, review=form.cleaned_data['review'])
             review.save()
-
-        context = {'product': Product.objects.all().filter(id=pk), 'Form': reviewForm,
+        sum = 0
+        for i in reviews.objects.all().filter(product_id=pk):
+            sum += 1
+        context = {'reveiwanswer':reviews.objects.all().filter(product_id=pk), 'sum':sum, 'product': Product.objects.all().get(id=pk),'ppk':pk, 'Form': reviewForm,
                    'User': UserOfSite.objects.get(username=Username, password=password), 'reviews': reviews.objects.all().filter(product_id=pk)}
         return render(request, 'products/product_detail.html', context)
-
 
 
 class OrdersView(View):
@@ -123,8 +138,8 @@ class OrdersView(View):
         })
     
 
-def site_header_component(request):
-    return render(request, 'shared/site_header_component.html')
+def site_header_component(request, User):
+    return render(request, 'shared/site_header_component.html', {'User': User})
 
 
 def site_footer_component(request):

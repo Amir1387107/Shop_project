@@ -66,6 +66,7 @@
                         <ul class="nav navbar-nav collapse navbar-collapse">
                             <li><a href='{% url "login" %}'>خـانه</a></li>
                             <li><a href="{% url 'contact_us_page' %}">تماس با مـا</a></li>
+                            <li><a href="{% url 'cart_page' username=User.username password=User.password%}" class="active"><i class="fa fa-shopping-cart"></i> سبد خریـد</a></li>
                         </ul>
                     </div>
                 </div>

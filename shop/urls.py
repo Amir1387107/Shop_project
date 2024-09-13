@@ -21,5 +21,6 @@ urlpatterns = [
     path('', include('products.urls'), name='login'),
     path('admin/', admin.site.urls),
     path('contact_us/', include('contact_module.urls'), name='contact_us_page'),
+    path('cart/', include('cart.urls'), name='cart_page'),
     path('FactorForm/', include('Factor.urls'), name='factor_page'),
 ]

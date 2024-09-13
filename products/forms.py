@@ -58,6 +58,4 @@ class SigninForm(forms.Form):
 
 
 class reviewForm(forms.Form):
-    username = forms.CharField(label='Username', max_length=3000)
-    product_id = forms.IntegerField(label='Product ID')
-    review = forms.CharField(label='Review', max_length=30000, widget=forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'نظر'}))
+    review = forms.CharField(label='Review', max_length=3000000, widget=forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'نظر'}))

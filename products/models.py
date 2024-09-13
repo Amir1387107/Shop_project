@@ -76,7 +76,6 @@ class Products(models.Model):
     model = models.CharField(max_length=300, verbose_name='مدل')
     color = models.CharField(max_length=300, verbose_name='رنگ')
     kind = models.ManyToManyField(Kind, related_name='Kind', verbose_name='دسته')
-    reviews = models.ManyToManyField(reviews, related_name='reviews', verbose_name='نظرات', blank=True, null=True)
     details = models.TextField(verbose_name='توضیحات', blank=True, null=True)
 
     image1 = models.ImageField(upload_to='Images/', verbose_name='عکس1', blank=True)
