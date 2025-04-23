@@ -24,13 +24,12 @@ class BuyForm(forms.ModelForm):
 
 class SellForm(forms.ModelForm):
     model = forms.CharField(widget=forms.TextInput(), label='مدل محصول')
-    color = forms.CharField(widget=forms.TextInput(), label='رنگ')
     number = forms.IntegerField(widget=forms.NumberInput(), label='تعداد')
 
     class Meta:
         model = SellModel
 
-        fields = ['number', 'model', 'color', 'price']
+        fields = ['number', 'model', 'price']
 
 
 class MoreForm(forms.ModelForm):

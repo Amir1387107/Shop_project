@@ -74,7 +74,7 @@ class reviews(models.Model):
 class Products(models.Model):
     price = models.CharField(max_length=300, verbose_name='قیمت')
     model = models.CharField(max_length=300, verbose_name='مدل')
-    color = models.CharField(max_length=300, verbose_name='رنگ')
+    color = models.CharField(max_length=300, verbose_name='رنگ', default=None, null=True, blank=True)
     kind = models.ManyToManyField(Kind, related_name='Kind', verbose_name='دسته')
     details = models.TextField(verbose_name='توضیحات', blank=True, null=True)
 

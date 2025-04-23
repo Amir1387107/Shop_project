@@ -18,17 +18,16 @@ class SellView(View):
         buying = SellForm(request.POST)
         if buying.is_valid():
             buying.cleaned_data['price'] = \
-            Prod.objects.all().filter(model=buying.cleaned_data['model'], color=buying.cleaned_data['color'])[0].price
+            Prod.objects.all().filter(model=buying.cleaned_data['model'])[0].price
             model = buying.cleaned_data['model']
-            color = buying.cleaned_data['color']
             price = buying.cleaned_data['price']
             number = buying.cleaned_data['number']
-            if Prod.objects.all().filter(model=model, color=color).exists():
+            if Prod.objects.all().filter(model=model).exists():
                 pass
             else:
                 return HttpResponse('محصول موجود نمی باشد')
 
-            Model = SellModel(model=model, color=color, price=price, number=number)
+            Model = SellModel(model=model, price=price, number=number)
             Model.save()
 
             return render(request, 'Factor/accepted_sell.html')
@@ -135,7 +134,8 @@ def SellFactorSaved(request, pk):
 
 def EmptySellModel(request):
     all = SellModel.objects.all()
-    more=More.objects.all()[0]
+    print(More.objects.all().first())
+    more = More.objects.all().first()
     for product in all:
         for number in range(product.number):
             Prod.objects.all().filter(model=product.model).delete()
@@ -144,9 +144,8 @@ def EmptySellModel(request):
     for product in all:
         num = product.number
         price = product.price
-        color = product.color
         model = product.model
-        Save = SellModelSave(number=num, price=price, color=color, model=model)
+        Save = SellModelSave(number=num, price=price, model=model)
         Save.save()
         fact.productsadded.add(Save)
 
